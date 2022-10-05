@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>indexxxxxxxxxxx</title>
+<!-- ページネーションのデザイン -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/destyle.css@3.0.2/destyle.min.css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+
+	<header>
+		<div class="dark">
+			<div class="text-center">
+				<h1 class="logo">TokyoBearMap</h1>
+			</div>
+		</div>
+	</header>
+
+	<div style="text-align: center;">
+		<iframe
+			src="https://www.google.com/maps/d/embed?mid=1-oqViyExSeBOEMIt-qP9Z2E60CMJE9M&ehbc=2E312F"
+			width="750" height="350"
+			style="border-radius: 30px; border: 1px solid;"></iframe>
+	</div>
+
+	<div class="container mt-3">
+		<table class="table">
+			<thead class="thead-dark">
+				<tr class="bg-light text-center text-nowrap">
+					<th>ID</th>
+					<th>日付</th>
+					<th>時間</th>
+					<th>場所</th>
+					<th>成獣</th>
+					<th>幼獣</th>
+					<th>不明</th>
+					<th>合計</th>
+					<th>目撃等</th>
+				</tr>
+			</thead>
+			<tr class="align-middle text-center" th:each="bear : ${bears}">
+				<td>[[${bear.id}]]</td>
+				<td>[[${bear.date}]]</td>
+				<td>[[${bear.time}]]</td>
+				<td>[[${bear.address}]]</td>
+				<td>[[${bear.adult}]]</td>
+				<td>[[${bear.child}]]</td>
+				<td>[[${bear.unknown}]]</td>
+				<td>[[${bear.total}]]</td>
+				<td>[[${bear.typeName}]]</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- 2 ページ以上の場合、ページネーションを表示:start -->
+	<div class="pager">
+		<div th:if="${totalPages >= 2}" class="container">
+
+			<div class="d-flex justify-content-center">
+				<ul class="Pagination">
+					<!-- 最初のページへ -->
+					<th:block th:switch="${page}">
+						<li th:case="1" class="Pagination-Item"><a
+							class="Pagination-Item-Link" href="">&laquo;</a></li>
+						<li th:case="*" class="Pagination-Item"><a
+							class="Pagination-Item-Link" th:href="@{/(page=${1})}">&laquo;</a></li>
+					</th:block>
+
+					<!-- 前のページへ -->
+					<th:block th:switch="${page}">
+						<li th:case="1" class="Pagination-Item disabled"><a
+							class="Pagination-Item-Link" href="">&lt;</a></li>
+						<li th:case="*" class="Pagination-Item"><a
+							class="Pagination-Item-Link" th:href="@{/(page=${page -1})}">&lt;</a></li>
+					</th:block>
+
+					<!-- ページ番号 -->
+						<th:block th:each="index : ${#numbers.sequence(start, end)}">
+							<th:block th:switch="${index}">
+								<li th:case="${page}" class="Pagination-Item active"><a
+									class="Pagination-Item-Link  isActive" href="">[[${index}]]</a></li>
+								<li th:case="*" class="Pagination-Item"><a
+									class="Pagination-Item-Link" th:href="@{/(page=${index})}">[[${index}]]</a></li>
+							</th:block>
+						</th:block>
+
+					<!-- 次のページへ -->
+					<th:block th:switch="${page}">
+						<li th:case="${totalPages}" class="Pagination-Item disabled"><a
+							class="Pagination-Item-Link" href="">&gt;</a></li>
+						<li th:case="*" class="Pagination-Item"><a
+							class="Pagination-Item-Link" th:href="@{/(page=${page + 1})}">&gt;</a></li>
+					</th:block>
+
+					<!-- 最後のページへ -->
+					<th:block th:switch="${page}">
+						<li th:case="${totalPages}" class="Pagination-Item disabled"><a
+							class="Pagination-Item-Link" href="">&raquo;</a></li>
+						<li th:case="*" class="Pagination-Item"><a
+							class="Pagination-Item-Link" th:href="@{/(page=${totalPages})}">&raquo;</a></li>
+					</th:block>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 2 ページ以上の場合、ページネーションを表示:end -->
+
+	<div style="text-align: center;">
+		<small> ※上記目撃等の情報はすべて<a
+			href="https://www.kankyo.metro.tokyo.lg.jp/nature/animals_plants/bear/witness.html">東京都環境局多摩環境事務所
+				自然環境課HP</a>より引用されたものです。<br>
+			本情報にはツキノワグマらしき動物（カモシカ、イノシシなどの可能性あり）の情報も含んでいますのでご承知おきください。
+		</small>
+	</div>
+
+<script>
+$(function () {
+    $('a').click(function (event) {
+        event.preventDefault();
+        var a_link = $(this).attr('href');//クリックしたリンク取得
+        $.ajax({
+            url: a_link,
+            cache: false,
+            type: 'POST',
+            data: {val:"test"},
+            timeout: 10000,
+            dataType: 'html'
+            }).done(function (data) { //Ajax通信に成功したときの処理
+                alert('success');
+                $("#ajax").html(data);//#ajaxに指定したページを表示
+            }).fail(function (data) { //Ajax通信に失敗したときの処理
+                alert('error');
+            }).always(function (data) { //処理が完了した場合の処理
+                // alert('always');
+        });
+    });
+});
+</script>
+
+	<script th:src="@{/js/jquery-3.5.1.min.js}"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

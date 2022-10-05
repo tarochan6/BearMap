@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.BearMapper">
+
+	<select id="selectAll" resultType="Bear">
+		SELECT
+		bears.*,
+		info_types.name
+		AS typeName
+		FROM bears
+		JOIN info_types
+		ON bears.info = info_types.id
+	</select>
+
+	<select id="selectbyId" parameterType="int" resultType="Bear">
+		SELECT
+		bears.*,
+		info_types.name AS typeName
+		FROM bears
+		JOIN info_types
+		ON
+		bears.info = info_types.id
+		WHERE bears.id = #{id}
+	</select>
+
+	<select id="selectLimited" resultType="Bear">
+		SELECT
+		bears.*,
+		info_types.name AS typeName
+		FROM bears
+		JOIN info_types
+		ON bears.info =
+		info_types.id
+		LIMIT #{offset}, #{limit}
+	</select>
+
+	<select id="count" resultType="long">
+		SELECT COUNT(*) FROM bears
+	</select>
+
+	<insert id="insert" parameterType="Bear">
+		INSERT INTO bears
+		(id, date,
+		time, address, adult, child, unknown, total, info)
+		VALUES (NULL,
+		#{date}, #{time}, #{address}, #{adult}, #{child}, #{unknown},
+		#{total}, #{info})
+	</insert>
+
+	<update id="update" parameterType="Bear">
+		UPDATE bears SET
+		date = #{date},
+		time = #{time},
+		address = #{address},
+		adult = #{adult},
+		child = #{child},
+		unknown = #{unknown},
+		total = #{total},
+		info = #{info}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM bears WHERE id = #{id}
+	</delete>
+
+</mapper>
