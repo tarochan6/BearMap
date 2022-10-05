@@ -16,4 +16,5 @@ public class Bear {
 	private Integer unknown;
 	private Integer total;
 	private Integer info;
+	private String typeName;
 }
