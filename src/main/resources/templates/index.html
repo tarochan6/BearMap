@@ -82,14 +82,14 @@
 					</th:block>
 
 					<!-- ページ番号 -->
-						<th:block th:each="index : ${#numbers.sequence(start, end)}">
-							<th:block th:switch="${index}">
-								<li th:case="${page}" class="Pagination-Item active"><a
-									class="Pagination-Item-Link  isActive" href="">[[${index}]]</a></li>
-								<li th:case="*" class="Pagination-Item"><a
-									class="Pagination-Item-Link" th:href="@{/(page=${index})}">[[${index}]]</a></li>
-							</th:block>
+					<th:block th:each="index : ${#numbers.sequence(start, end)}">
+						<th:block th:switch="${index}">
+							<li th:case="${page}" class="Pagination-Item active"><a
+								class="Pagination-Item-Link  isActive" href="">[[${index}]]</a></li>
+							<li th:case="*" class="Pagination-Item"><a
+								class="Pagination-Item-Link" th:href="@{/(page=${index})}">[[${index}]]</a></li>
 						</th:block>
+					</th:block>
 
 					<!-- 次のページへ -->
 					<th:block th:switch="${page}">
@@ -120,30 +120,13 @@
 		</small>
 	</div>
 
-<script>
-$(function () {
-    $('a').click(function (event) {
-        event.preventDefault();
-        var a_link = $(this).attr('href');//クリックしたリンク取得
-        $.ajax({
-            url: a_link,
-            cache: false,
-            type: 'POST',
-            data: {val:"test"},
-            timeout: 10000,
-            dataType: 'html'
-            }).done(function (data) { //Ajax通信に成功したときの処理
-                alert('success');
-                $("#ajax").html(data);//#ajaxに指定したページを表示
-            }).fail(function (data) { //Ajax通信に失敗したときの処理
-                alert('error');
-            }).always(function (data) { //処理が完了した場合の処理
-                // alert('always');
-        });
-    });
-});
-</script>
-
+<div class="mt-5 mb-2">
+	<div style="text-align: center;">
+		<small>
+		<a href="/admin/login">管理者用ページ</a>
+		</small>
+	</div>
+</div>
 	<script th:src="@{/js/jquery-3.5.1.min.js}"></script>
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
