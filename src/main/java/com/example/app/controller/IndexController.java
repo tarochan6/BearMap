@@ -18,7 +18,7 @@ public class IndexController {
 
 	
 	@Autowired
-	BearService bearService;
+	BearService service;
 	
 	// ページ番号
 	private int[] getStartAndEnd(int currentPage, int totalPages, int range) {
@@ -56,10 +56,10 @@ public class IndexController {
 	
 	@GetMapping
 	private String ShowIndex(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) throws Exception {
-		model.addAttribute("bears", bearService.getBearListByPage(page, NUM_PER_PAGE));
+		model.addAttribute("bears", service.getBearListByPage(page, NUM_PER_PAGE));
 		model.addAttribute("page", page);
-		model.addAttribute("totalPages", bearService.getTotalPages(NUM_PER_PAGE));
-		int[] startAndEnd = getStartAndEnd(page, bearService.getTotalPages(NUM_PER_PAGE), range);
+		model.addAttribute("totalPages", service.getTotalPages(NUM_PER_PAGE));
+		int[] startAndEnd = getStartAndEnd(page, service.getTotalPages(NUM_PER_PAGE), range);
 		model.addAttribute("start", startAndEnd[0]);
 		model.addAttribute("end", startAndEnd[1]);
 		
