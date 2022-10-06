@@ -46,14 +46,19 @@ public class AdminController {
 		// 正しいログインIDとパスワード
 		// ⇒セッションにログインIDを格納し、adminindexへ
 		session.setAttribute("loginId", admin.getLoginId());
-		return "/admins/adminIndex";
+		return "redirect:index";
+	}
+	
+	@GetMapping("/index")
+	public String index() {
+	  return "/admins/index";
 	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		// セッションを破棄し、ログインページへ遷移
 		session.invalidate();
-		return "/admins/login";
+		return "redirect:/";
 	}
 
 }
