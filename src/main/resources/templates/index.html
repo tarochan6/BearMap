@@ -15,13 +15,8 @@
 </head>
 <body>
 
-	<header>
-		<div class="dark">
-			<div class="text-center">
-				<h1 class="logo">TokyoBearMap</h1>
-			</div>
-		</div>
-	</header>
+	<!-- ヘッダーの呼び出し -->
+    <div th:replace="parts/parts :: header"></div>
 
 	<div style="text-align: center;">
 		<iframe
@@ -123,7 +118,7 @@
 <div class="mt-5 mb-2">
 	<div style="text-align: center;">
 		<small>
-		<a href="/admins/login">管理者用ページ</a>
+		<a th:href="@{/login}">管理者用ページ</a>
 		</small>
 	</div>
 </div>

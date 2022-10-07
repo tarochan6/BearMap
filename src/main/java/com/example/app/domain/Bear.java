@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class Bear {
-
 	private Integer id;
 	@NotBlank
 	private Date date;
@@ -19,7 +18,6 @@ public class Bear {
 	private Integer child;
 	private Integer unknown;
 	private Integer total;
-	@NotBlank
-	private Integer info;
+	private Integer typeId;
 	private String typeName;
 }

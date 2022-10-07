@@ -7,8 +7,14 @@
 <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<!-- ヘッダーの呼び出し -->
-    <div th:replace="parts/parts :: header"></div>
+
+	<header>
+		<div class="dark">
+			<div class="text-center">
+				<h1 class="logo">TokyoBearMap</h1>
+			</div>
+		</div>
+	</header>
 
 	<div class="text-center mt-4">
 		<h1>管理者用ログインページ</h1>
@@ -23,9 +29,6 @@
 			<input class="btn btn-primary" type="submit" value="ログイン">
 		</form>
 	</div>
-	
-
-<p>aaaaaaaa</p>
 
 </body>
 </html>
