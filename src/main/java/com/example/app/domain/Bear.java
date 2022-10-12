@@ -3,13 +3,14 @@ package com.example.app.domain;
 import java.sql.Date;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
 @Data
 public class Bear {
 	private Integer id;
-	@NotBlank
+	@NotNull
 	private Date date;
 	private String time;
 	@NotBlank

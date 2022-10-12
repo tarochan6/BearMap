@@ -38,8 +38,6 @@
 			<p class="mt-2">
 				場所：<input type="text" th:field="*{address}">
 			</p>
-
-
 			<p class="mt-2">
 				成獣：<input type="number" th:field="*{adult}" name="adult">
 			</p>
@@ -51,15 +49,7 @@
 			</p>
 			<p class="mt-2">
 				合計：
-				<!-- <input type="number" th:field="*{total}"> -->
-				<!-- <form onsubmit="return false" oninput="z.value = Number(x.value) + Number(y.value)">
-  				<input name="x" type="number" value="5"> +
-  				<input name="y" type="number" value="3"> =
- 				 <output name="z">8</output>	
-				</form>
-				 -->
-
-				<output th:field="*{total}" name="total">0</output>
+				<input type="number" th:field="*{total}" name="total">
 			</p>
 			<p class="mt-2">
 				目撃等： <select th:field="*{typeId}">

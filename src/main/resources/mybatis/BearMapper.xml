@@ -45,7 +45,7 @@
 		time, address, adult, child, unknown, total, info)
 		VALUES (NULL,
 		#{date}, #{time}, #{address}, #{adult}, #{child}, #{unknown},
-		#{total}, #{info})
+		#{total}, #{typeId})
 	</insert>
 
 	<update id="update" parameterType="Bear">
@@ -57,7 +57,7 @@
 		child = #{child},
 		unknown = #{unknown},
 		total = #{total},
-		info = #{info}
+		info = #{typeId}
 		WHERE id = #{id}
 	</update>
 

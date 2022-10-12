@@ -50,7 +50,6 @@ public class AdminController {
 		bear.setAdult(0);
 		bear.setChild(0);
 		bear.setUnknown(0);
-		bear.setTotal(0);
 		model.addAttribute("title", "データの追加");
 		model.addAttribute("bear", bear);
 		model.addAttribute("types", bearService.getTypeList());
