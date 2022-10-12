@@ -2,29 +2,24 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>TOKYO BEAR MAP</title>
+<title>管理者用ページ - TOKYO BEAR MAP</title>
 <!-- ページネーションのデザイン -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/destyle.css@3.0.2/destyle.min.css">
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" th:href="@{/css/style.css}">
-
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
 </head>
 <body>
-
 	<!-- ヘッダーの呼び出し -->
-    <div th:replace="parts/parts :: header"></div>
+	<div th:replace="parts/parts :: header"></div>
 
-	<div style="text-align: center;">
-		<iframe
-			src="https://www.google.com/maps/d/embed?mid=1-oqViyExSeBOEMIt-qP9Z2E60CMJE9M&ehbc=2E312F"
-			width="750" height="350"
-			style="border-radius: 30px; border: 1px solid;"></iframe>
-	</div>
-
+	<!-- 操作に応じたメッセージを表示:start -->
+	<div th:if="${statusMessage}" class="alert alert-success mt-4">[[${statusMessage}]]</div>
+	<!-- 操作に応じたメッセージを表示:end -->
+	<p>
+			<a class="mt-4 btn btn-primary" th:href="@{/admins/add}">データの追加</a> <a
+				class="mt-4 ml-4 btn btn-secondary" th:href="@{/logout}">ログアウト </a>
+		</p>
 	<div class="container mt-3">
 		<table class="table">
 			<thead class="thead-dark">
@@ -38,6 +33,7 @@
 					<th>不明</th>
 					<th>合計</th>
 					<th>目撃等</th>
+					<th colspan="2">操作</th>
 				</tr>
 			</thead>
 			<tr class="align-middle text-center" th:each="bear : ${bears}">
@@ -50,6 +46,11 @@
 				<td>[[${bear.unknown}]]</td>
 				<td>[[${bear.total}]]</td>
 				<td>[[${bear.typeName}]]</td>
+				<td><a class="btn btn-primary text-nowrap"
+					th:href="@{/admins/edit/{id}(id=${bear.id})}">編集 </a></td>
+				<td><a class="btn btn-danger delete text-nowrap"
+					th:href="@{/admins/delete/{id}(id=${bear.id})}" data-toggle="modal"
+					data-target="#confirm-modal" th:data-name="${bear.id}">削除</a></td>
 			</tr>
 		</table>
 	</div>
@@ -65,7 +66,8 @@
 						<li th:case="1" class="Pagination-Item"><a
 							class="Pagination-Item-Link" href="">&laquo;</a></li>
 						<li th:case="*" class="Pagination-Item"><a
-							class="Pagination-Item-Link" th:href="@{/(page=${1})}">&laquo;</a></li>
+							class="Pagination-Item-Link"
+							th:href="@{/admins/index/(page=${1})}">&laquo;</a></li>
 					</th:block>
 
 					<!-- 前のページへ -->
@@ -73,7 +75,8 @@
 						<li th:case="1" class="Pagination-Item disabled"><a
 							class="Pagination-Item-Link" href="">&lt;</a></li>
 						<li th:case="*" class="Pagination-Item"><a
-							class="Pagination-Item-Link" th:href="@{/(page=${page -1})}">&lt;</a></li>
+							class="Pagination-Item-Link"
+							th:href="@{/admins/index/(page=${page -1})}">&lt;</a></li>
 					</th:block>
 
 					<!-- ページ番号 -->
@@ -82,7 +85,8 @@
 							<li th:case="${page}" class="Pagination-Item active"><a
 								class="Pagination-Item-Link  isActive" href="">[[${index}]]</a></li>
 							<li th:case="*" class="Pagination-Item"><a
-								class="Pagination-Item-Link" th:href="@{/(page=${index})}">[[${index}]]</a></li>
+								class="Pagination-Item-Link"
+								th:href="@{/admins/index/(page=${index})}">[[${index}]]</a></li>
 						</th:block>
 					</th:block>
 
@@ -91,7 +95,8 @@
 						<li th:case="${totalPages}" class="Pagination-Item disabled"><a
 							class="Pagination-Item-Link" href="">&gt;</a></li>
 						<li th:case="*" class="Pagination-Item"><a
-							class="Pagination-Item-Link" th:href="@{/(page=${page + 1})}">&gt;</a></li>
+							class="Pagination-Item-Link"
+							th:href="@{/admins/index/(page=${page + 1})}">&gt;</a></li>
 					</th:block>
 
 					<!-- 最後のページへ -->
@@ -99,7 +104,8 @@
 						<li th:case="${totalPages}" class="Pagination-Item disabled"><a
 							class="Pagination-Item-Link" href="">&raquo;</a></li>
 						<li th:case="*" class="Pagination-Item"><a
-							class="Pagination-Item-Link" th:href="@{/(page=${totalPages})}">&raquo;</a></li>
+							class="Pagination-Item-Link"
+							th:href="@{/admins/index/(page=${totalPages})}">&raquo;</a></li>
 					</th:block>
 				</ul>
 			</div>
@@ -107,22 +113,13 @@
 	</div>
 	<!-- 2 ページ以上の場合、ページネーションを表示:end -->
 
-	<div style="text-align: center;">
-		<small> ※上記目撃等の情報はすべて<a
-			href="https://www.kankyo.metro.tokyo.lg.jp/nature/animals_plants/bear/witness.html">東京都環境局多摩環境事務所
-				自然環境課HP</a>より引用されたものです。<br>
-			本情報にはツキノワグマらしき動物（カモシカ、イノシシなどの可能性あり）の情報も含んでいますのでご承知おきください。
-		</small>
-	</div>
-
-<div class="mt-5 mb-2">
-	<div style="text-align: center;">
-		<small>
-		<a th:href="@{/login}">管理者用ページ</a>
-		</small>
-	</div>
-</div>
-
+	<script th:src="@{/js/jquery-3.5.1.min.js}"></script>
+	<script>
+		$(".delete").click(function() {
+			$("#delete-name").text($(this).attr("data-name"));
+			$("#delete-yes").attr("href", $(this).attr("href"));
+		});
+	</script>
 
 </body>
 </html>

@@ -38,6 +38,11 @@ public class BearServiceImpl implements BearService {
 	}
 
 	@Override
+	public Long getCount() throws Exception {
+		return bearMapper.count();
+	}
+	
+	@Override
 	public Bear getBearById(Integer id) throws Exception {
 		return bearMapper.selectById(id);
 	}
@@ -63,5 +68,7 @@ public class BearServiceImpl implements BearService {
 	public List<InfoType> getTypeList() throws Exception {
 		return infoTypeMapper.selectAll();
 	}
+
+
 
 }

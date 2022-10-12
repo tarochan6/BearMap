@@ -13,6 +13,9 @@ public interface BearService {
 	List<Bear> getBearListByPage(int page, int numPerPage) throws Exception;
 	int getTotalPages(int numPerPage) throws Exception;
 	
+	// データ数の取得
+	Long getCount() throws Exception;
+	
 	Bear getBearById(Integer id) throws Exception;
 
 	void addBear(Bear bear) throws Exception;
@@ -22,5 +25,6 @@ public interface BearService {
 	void deleteBear(Integer id) throws Exception;
 
 	List<InfoType> getTypeList() throws Exception;
+	
 	
 }

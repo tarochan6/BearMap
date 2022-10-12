@@ -4,7 +4,7 @@
 <mapper namespace="com.example.app.mapper.InfoTypeMapper">
 
 <select id="selectAll" resultType="InfoType">
-SELECT * FROM Info_types
+SELECT * FROM Info_types ORDER BY id
 </select>
 
 </mapper>
