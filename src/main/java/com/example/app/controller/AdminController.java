@@ -83,7 +83,7 @@ public class AdminController {
 		return "redirect:/admins/index";
 	}
 
-	@GetMapping("/edit/{id}")
+	@GetMapping("/edit/{id}/{page}")
 	public String editGet(@PathVariable Integer id, Model model) throws Exception {
 		model.addAttribute("title", "データの編集");
 		model.addAttribute("bear", bearService.getBearById(id));
@@ -91,9 +91,9 @@ public class AdminController {
 		return "admins/save";
 	}
 
-	@PostMapping("/edit/{id}")
+	@PostMapping("/edit/{id}/{page}")
 	public String editPost(@PathVariable Integer id, @Valid Bear bear, Errors errors, RedirectAttributes rd,
-			Model model) throws Exception {
+			Model model, @RequestParam(name = "page", defaultValue = "1") Integer page) throws Exception {
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "データの編集");
 			model.addAttribute("types", bearService.getTypeList());
@@ -101,15 +101,24 @@ public class AdminController {
 		}
 
 		bearService.editBear(bear);
+		rd.addFlashAttribute("page", page);
 		rd.addFlashAttribute("statusMessage", "データを更新しました。");
-		return "redirect:/admins/index";
+		return "redirect:/admins/index/?page={page}";
 	}
 
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable Integer id, RedirectAttributes rd) throws Exception {
+	
+	@GetMapping("/index/?page={page}")
+	public String showDelete(Model model) throws Exception {
+		return "admins/index";
+	}
+	
+	
+	@GetMapping("/delete/{id}/{page}")
+	public String delete(@PathVariable Integer id, RedirectAttributes rd, Model model, @RequestParam(name = "page", defaultValue = "1") Integer page) throws Exception {
 		bearService.deleteBear(id);
+		model.addAttribute("page", page);
 		rd.addFlashAttribute("statusMessage", "データを削除しました。");
-		return "redirect:/admins/index";
+		return "redirect:/admins/index/?page={page}";
 	}
 
 }

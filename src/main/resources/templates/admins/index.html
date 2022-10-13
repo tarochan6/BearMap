@@ -20,12 +20,12 @@
 	<!-- 操作に応じたメッセージを表示:end -->
 	
 	<div class="container mt-3">
-	<div class="d-flex justify-content-between">
-		<p>
-			<a class="my-auto btn btn-primary" th:href="@{/admins/add}">データの追加</a>
-			<a class="my-auto ml-4 btn btn-secondary" th:href="@{/logout}">ログアウト
-			</a>
-		</p>
+	<div class="d-flex bd-highlight mb-3">
+		
+			<a class="btn btn-primary p-2 bd-highlight" th:href="@{/admins/add}">データの追加</a>
+			<a class="btn btn-primary ml-2 p-2 disabled" href="" >CSV出力</a>
+			<a class="btn btn-secondary ml-auto p-2 bd-highlight" th:href="@{/logout}">ログアウト</a>
+		
 	</div>
 	</div>
 
@@ -57,9 +57,9 @@
 				<td>[[${bear.total}]]</td>
 				<td>[[${bear.typeName}]]</td>
 				<td><a class="btn btn-outline-primary text-nowrap"
-					th:href="@{/admins/edit/{id}(id=${bear.id})}">編集 </a></td>
+					th:href="@{/admins/edit/{id}(id=${bear.id})} + @{/{page}(page=${page})}">編集 </a></td>
 				<td><a class="btn btn-outline-danger delete text-nowrap"
-					th:href="@{/admins/delete/{id}(id=${bear.id})}" data-toggle="modal"
+					th:href="@{/admins/delete/{id}(id=${bear.id})} + @{/{page}(page=${page})}" data-toggle="modal"
 					data-target="#confirm-modal" th:data-name="${bear.id}">削除</a></td>
 			</tr>
 		</table>
@@ -69,7 +69,7 @@
 	<div class="pager">
 		<div th:if="${totalPages >= 2}" class="container">
 
-			<div class="d-flex justify-content-center">
+			<div class="d-flex justify-content-center mb-4">
 				<ul class="Pagination">
 					<!-- 最初のページへ -->
 					<th:block th:switch="${page}">
