@@ -23,7 +23,7 @@
 		<h1 class="mt-1 mb-4">[[${title}]]</h1>
 		<form action="" method="post" th:object="${bear}"
 			oninput="total.value = Number(adult.value) + Number(child.value) + Number(unknown.value);">
-			
+
 			<p class="mt-2">
 				ID：<input type="number" th:field="*{id}">
 			</p>
@@ -48,8 +48,11 @@
 				不明：<input type="number" th:field="*{unknown}" name="unknown">
 			</p>
 			<p class="mt-2">
-				合計：
-				<input type="number" th:field="*{total}" name="total">
+				合計：<input type="number" th:field="*{total}" name="total" readonly>
+				
+				<!-- 
+				<output th:field="*{total}"  name="total">0</output>
+				 -->
 			</p>
 			<p class="mt-2">
 				目撃等： <select th:field="*{typeId}">
@@ -57,7 +60,7 @@
 						th:text="${type.name}"></option>
 				</select>
 			</p>
-			<input class="btn btn-primary" type="submit">
+			<input class="btn btn-primary my-2" type="submit">
 		</form>
 	</div>
 

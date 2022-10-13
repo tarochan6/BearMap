@@ -14,13 +14,23 @@
 	<div th:replace="parts/parts :: header"></div>
 
 	<!-- 操作に応じたメッセージを表示:start -->
-	<div th:if="${statusMessage}" class="alert alert-success mt-4">[[${statusMessage}]]</div>
-	<!-- 操作に応じたメッセージを表示:end -->
-	<p>
-			<a class="mt-4 btn btn-primary" th:href="@{/admins/add}">データの追加</a> <a
-				class="mt-4 ml-4 btn btn-secondary" th:href="@{/logout}">ログアウト </a>
-		</p>
 	<div class="container mt-3">
+		<div th:if="${statusMessage}" class="alert alert-success mt-4">[[${statusMessage}]]</div>
+	</div>
+	<!-- 操作に応じたメッセージを表示:end -->
+	
+	<div class="container mt-3">
+	<div class="d-flex justify-content-between">
+		<p>
+			<a class="my-auto btn btn-primary" th:href="@{/admins/add}">データの追加</a>
+			<a class="my-auto ml-4 btn btn-secondary" th:href="@{/logout}">ログアウト
+			</a>
+		</p>
+	</div>
+	</div>
+
+
+	<div class="container">
 		<table class="table">
 			<thead class="thead-dark">
 				<tr class="bg-light text-center text-nowrap">
@@ -38,7 +48,7 @@
 			</thead>
 			<tr class="align-middle text-center" th:each="bear : ${bears}">
 				<td>[[${bear.id}]]</td>
-				<td>[[${bear.date}]]</td>
+				<td th:text="${#dates.format(bear.date, 'yyyy-MM-dd')}" class="text-nowrap"></td>
 				<td>[[${bear.time}]]</td>
 				<td>[[${bear.address}]]</td>
 				<td>[[${bear.adult}]]</td>
@@ -46,9 +56,9 @@
 				<td>[[${bear.unknown}]]</td>
 				<td>[[${bear.total}]]</td>
 				<td>[[${bear.typeName}]]</td>
-				<td><a class="btn btn-primary text-nowrap"
+				<td><a class="btn btn-outline-primary text-nowrap"
 					th:href="@{/admins/edit/{id}(id=${bear.id})}">編集 </a></td>
-				<td><a class="btn btn-danger delete text-nowrap"
+				<td><a class="btn btn-outline-danger delete text-nowrap"
 					th:href="@{/admins/delete/{id}(id=${bear.id})}" data-toggle="modal"
 					data-target="#confirm-modal" th:data-name="${bear.id}">削除</a></td>
 			</tr>

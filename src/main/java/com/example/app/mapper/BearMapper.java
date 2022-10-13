@@ -14,6 +14,9 @@ public interface BearMapper {
 	// ページ分割機能用
 	Long count() throws Exception;
 
+	// データ数カウント機能用
+	Long countLast() throws Exception;
+
 	List<Bear> selectLimited(@Param("offset") int offset, @Param("limit") int limit) throws Exception;
 
 	void insert(Bear bear) throws Exception;

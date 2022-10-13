@@ -15,6 +15,8 @@ public interface BearService {
 	
 	// データ数の取得
 	Long getCount() throws Exception;
+	// 最終データ数の取得
+	Long getCountLast() throws  Exception;
 	
 	Bear getBearById(Integer id) throws Exception;
 
