@@ -21,44 +21,49 @@
 
 	<div class="container">
 		<h1 class="mt-1 mb-4">[[${title}]]</h1>
-		<form action="" method="post" th:object="${bear}"
-			oninput="total.value = Number(adult.value) + Number(child.value) + Number(unknown.value);">
-			
-			<p class="mt-2">
-				ID：<input type="number" th:field="*{id}">
-			</p>
-			<span th:errors="*{date}" class="error"></span>
-			<p class="mt-2">
-				日付：<input type="date" th:field="*{date}">
-			</p>
-			<p class="mt-2">
-				時間：<input type="text" th:field="*{time}">
-			</p>
-			<span th:errors="*{address}" class="error"></span>
-			<p class="mt-2">
-				場所：<input type="text" th:field="*{address}">
-			</p>
-			<p class="mt-2">
-				成獣：<input type="number" th:field="*{adult}" name="adult">
-			</p>
-			<p class="mt-2">
-				幼獣：<input type="number" th:field="*{child}" name="child">
-			</p>
-			<p class="mt-2">
-				不明：<input type="number" th:field="*{unknown}" name="unknown">
-			</p>
-			<p class="mt-2">
-				合計：
-				<input type="number" th:field="*{total}" name="total">
-			</p>
-			<p class="mt-2">
-				目撃等： <select th:field="*{typeId}">
-					<option th:each="type : ${types}" th:value="${type.id}"
-						th:text="${type.name}"></option>
-				</select>
-			</p>
-			<input class="btn btn-primary" type="submit">
-		</form>
+		<div class="form-group">
+			<form action="" method="post" th:object="${bear}"
+				oninput="total.value = Number(adult.value) + Number(child.value) + Number(unknown.value);">
+
+				<p class="mt-2">
+					ID：<input type="number" th:field="*{id}">
+				</p>
+				<span th:errors="*{date}" class="error"></span>
+				<p class="mt-2">
+					日付：<input type="date" th:field="*{date}">
+				</p>
+				<p class="mt-2">
+					時間：<input type="text" th:field="*{time}">
+				</p>
+				<span th:errors="*{address}" class="error"></span>
+				<p class="mt-2">
+					場所：<input type="text" th:field="*{address}">
+				</p>
+				<p class="mt-2">
+					成獣：<input type="number" th:field="*{adult}" name="adult">
+				</p>
+				<p class="mt-2">
+					幼獣：<input type="number" th:field="*{child}" name="child">
+				</p>
+				<p class="mt-2">
+					不明：<input type="number" th:field="*{unknown}" name="unknown">
+				</p>
+				<p class="mt-2">
+					合計：<input type="number" th:field="*{total}" name="total" readonly>
+
+					<!-- 
+				<output th:field="*{total}"  name="total">0</output>
+				 -->
+				</p>
+				<p class="mt-2">
+					目撃等： <select th:field="*{typeId}">
+						<option th:each="type : ${types}" th:value="${type.id}"
+							th:text="${type.name}"></option>
+					</select>
+				</p>
+				<input class="btn btn-primary mt-2 mb-5" type="submit">
+			</form>
+		</div>
 	</div>
 
 </body>
