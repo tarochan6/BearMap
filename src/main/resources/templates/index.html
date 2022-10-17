@@ -42,7 +42,7 @@
 			</thead>
 			<tr class="align-middle text-center" th:each="bear : ${bears}">
 				<td>[[${bear.id}]]</td>
-				<td  th:text="${#dates.format(bear.date, 'yyyy-MM-dd')}"></td>
+				<td  th:text="${#dates.format(bear.date, 'yyyy-MM-dd')}" class="text-nowrap"></td>
 				<td>[[${bear.time}]]</td>
 				<td>[[${bear.address}]]</td>
 				<td>[[${bear.adult}]]</td>
