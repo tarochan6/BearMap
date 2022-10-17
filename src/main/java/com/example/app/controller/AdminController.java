@@ -23,15 +23,6 @@ import com.example.app.service.PagerService;
 @RequestMapping("/admins")
 
 public class AdminController {
-	/*
-	@InitBinder
-	public void initBinderForm(WebDataBinder binder) {
-	// date用のフォーマット
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-	}
-	*/
-	
 	@Autowired
 	BearService bearService;
 
@@ -43,7 +34,6 @@ public class AdminController {
 	// 1ページ当たりのページ番号の表示件数
 	private static final int range = 5;
 
-	
 	@GetMapping("/index")
 	public String showIndex(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model, Date date)
 			throws Exception {
@@ -70,16 +60,14 @@ public class AdminController {
 	}
 
 	@PostMapping("/add")
-	public String addPost( @Valid Bear bear, Errors errors, RedirectAttributes rd, Model model) throws Exception {
-		if(errors.hasErrors()) {
-
+	public String addPost(@Valid Bear bear, Errors errors, RedirectAttributes rd, Model model) throws Exception {
+		if (errors.hasErrors()) {
 			model.addAttribute("title", "データの追加");
-	
 			model.addAttribute("types", bearService.getTypeList());
 			return "admins/save";
 		}
-			bearService.addBear(bear);
-			rd.addFlashAttribute("statusMessage", "データを追加しました。");
+		bearService.addBear(bear);
+		rd.addFlashAttribute("statusMessage", "データを追加しました。");
 		return "redirect:/admins/index";
 	}
 
@@ -106,17 +94,29 @@ public class AdminController {
 		return "redirect:/admins/index/?page={page}";
 	}
 
-	
 	@GetMapping("/index/?page={page}")
-	public String showDelete(Model model) throws Exception {
+	public String showRedirect(Model model) throws Exception {
 		return "admins/index";
 	}
-	
-	
+
+	@GetMapping("/index/?page={pages}")
+	public String showEnd(Model model) throws Exception {
+		return "admins/index";
+	}
+
 	@GetMapping("/delete/{id}/{page}")
-	public String delete(@PathVariable Integer id, RedirectAttributes rd, Model model, @RequestParam(name = "page", defaultValue = "1") Integer page) throws Exception {
-		bearService.deleteBear(id);
+	public String delete(@PathVariable Integer id, RedirectAttributes rd, Model model,
+			@RequestParam(name = "page", defaultValue = "1") Integer page) throws Exception {
+
 		model.addAttribute("page", page);
+
+		/*
+		 * if(((bearService.getTotalPages(NUM_PER_PAGE)) / page) > 1) {
+		 * model.addAttribute("pages", (page - 1)); bearService.deleteBear(id);
+		 * rd.addFlashAttribute("statusMessage", "データを削除しました。"); return
+		 * "redirect:/admins/index/?page=pages"; }
+		 */
+		bearService.deleteBear(id);
 		rd.addFlashAttribute("statusMessage", "データを削除しました。");
 		return "redirect:/admins/index/?page={page}";
 	}
