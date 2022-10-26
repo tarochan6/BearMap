@@ -5,17 +5,13 @@
 	color: #f00;
 }
 
-.news_target span {
-	display: inline-block;
-	margin-right: 1em;
-}
-
 .dark {
 	margin-bottom: 20px;
 	padding: 20px;
 	text-align: center;
 	background: #010a01;
 }
+
 
 .logo {
 	font-family: 'Anton', sans-serif;
@@ -56,3 +52,4 @@
   background: #111;
   color: #fff;
 }
+

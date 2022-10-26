@@ -13,14 +13,11 @@
 		ON bears.info = info_types.id
 	</select>
 
-	<select id="selectById" parameterType="int" resultType="Bear">
+	<select id="selectById" parameterType="int" resultType="Bear">		
 		SELECT
-		bears.*,
-		info_types.name AS typeName
+		bears.id, bears.date, bears.time, bears.address, bears.adult, bears.child, bears.unknown, bears.total, bears.info,
+		bears.info AS typeId
 		FROM bears
-		JOIN info_types
-		ON
-		bears.info = info_types.id
 		WHERE bears.id = #{id}
 	</select>
 
