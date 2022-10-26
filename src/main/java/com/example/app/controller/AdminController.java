@@ -110,12 +110,6 @@ public class AdminController {
 
 		model.addAttribute("page", page);
 
-		/*
-		 * if(((bearService.getTotalPages(NUM_PER_PAGE)) / page) > 1) {
-		 * model.addAttribute("pages", (page - 1)); bearService.deleteBear(id);
-		 * rd.addFlashAttribute("statusMessage", "データを削除しました。"); return
-		 * "redirect:/admins/index/?page=pages"; }
-		 */
 		bearService.deleteBear(id);
 		rd.addFlashAttribute("statusMessage", "データを削除しました。");
 		return "redirect:/admins/index/?page={page}";

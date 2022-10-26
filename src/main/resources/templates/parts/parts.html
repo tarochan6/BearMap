@@ -7,13 +7,19 @@
 <body>
 
 	<header th:fragment="header">
-		<div class="dark">
+		<div class="dark container-fluid">
 			<div class="text-center">
 				<h1 class="logo">TokyoBearMap</h1>
 			</div>
 		</div>
 	</header>
-	
+
+	<div th:fragment="adminsNavbar">
+		<nav class="navbar navbar-dark bg-dark">
+		<h1 class="logo">TokyoBearMap</h1>
+				<a class="btn btn-secondary  bd-highlight" th:href="@{/logout}">ログアウト</a>
+		</nav>
+	</div>
 
 </body>
 </html>

@@ -8,16 +8,13 @@
 </head>
 <body>
 
-	<header>
-		<div class="dark">
-			<div class="text-center">
-				<h1 class="logo">TokyoBearMap</h1>
-			</div>
-		</div>
-	</header>
-
+	<!-- ヘッダーの呼び出し -->
+	<div th:replace="parts/parts :: header"></div>
+	<!-- 
 	<div class="text-center mt-4">
 		<h1>管理者用ログインページ</h1>
+
+		
 		<form class="mt-4" action="" method="post" th:object="${admin}">
 			<span th:errors="*{loginId}" class="error"></span>
 			<p class="mt-2">
@@ -29,6 +26,39 @@
 			<input class="btn btn-primary" type="submit" value="ログイン">
 		</form>
 	</div>
+ -->
+	<div class="text-center mt-4">
+		<h1>管理者用ログインページ</h1>
+	</div>
+
+	<div class="container mt-2">
+		<div class="row">
+			<div class="col-lg-4 offset-lg-4">
+				<form action="" method="post" th:object="${admin}">
+					<span th:errors="*{loginId}" class="error"></span>
+					<p class="mt-2">
+					<div class="form-floating">
+						<input type="text" name="loginId"
+							class="form-control rounded-0 rounded-top" th:field="*{loginId}"
+							placeholder="ログインID">
+					</div>
+
+					<div class="form-floating mb-3">
+						<input type="password" th:field="*{loginPass}"
+							class="form-control border-top-0 rounded-0 rounded-bottom"
+							placeholder="パスワード">
+					</div>
+
+					<input class="w-100 btn btn-lg btn-primary mb-3 " type="submit"
+						value="ログイン">
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="text-center mt-3">
+<a th:href="@{/}">戻る</a>
+</div>
 
 </body>
 </html>
