@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -15,11 +15,12 @@
 	</header>
 
 	<div th:fragment="adminsNavbar">
-		<nav class="navbar navbar-dark bg-dark">
-		<h1 class="logo">TokyoBearMap</h1>
+	
+		<nav class="navbar navbar-dark bg-dark container-fluid">
+		<h2 class="logo">TokyoBearMap</h2>
 				<a class="btn btn-secondary  bd-highlight" th:href="@{/logout}">ログアウト</a>
 		</nav>
-	</div>
-
+	
+</div>
 </body>
 </html>

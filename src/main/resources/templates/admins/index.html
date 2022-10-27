@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>管理者用ページ - TOKYO BEAR MAP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>管理者用ページ - TkyoBearMap</title>
 <!-- ページネーションのデザイン -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/destyle.css@3.0.2/destyle.min.css">
@@ -28,10 +28,10 @@
 	</div>
 	</div>
 
-	<div class="container">
-		<table class="table">
+	<div class="mt-3">
+		<table class="table table-hover">
 			<thead class="thead-dark">
-				<tr class="bg-light text-center text-nowrap">
+				<tr class="bg-light text-center">
 					<th>ID</th>
 					<th>日付</th>
 					<th>時間</th>
@@ -46,7 +46,7 @@
 			</thead>
 			<tr class="align-middle text-center" th:each="bear : ${bears}">
 				<td>[[${bear.id}]]</td>
-				<td th:text="${#dates.format(bear.date, 'yyyy-MM-dd')}" class="text-nowrap"></td>
+				<td th:text="${#dates.format(bear.date, 'yyyy-MM-dd')}"></td>
 				<td>[[${bear.time}]]</td>
 				<td>[[${bear.address}]]</td>
 				<td>[[${bear.adult}]]</td>
@@ -56,9 +56,9 @@
 				<td>[[${bear.typeName}]]</td>
 				
 			
-				<td><a class="btn btn-outline-primary text-nowrap"
+				<td><a class="btn btn-outline-primary"
 					th:href="@{/admins/edit/{id}/{page}(id=${bear.id},page=${page})}">編集 </a></td> 
-				<td><a class="btn btn-outline-danger delete text-nowrap"
+				<td><a class="btn btn-outline-danger delete"
 					th:href="@{/admins/delete/{id}/{page}(id=${bear.id},page=${page})}" data-toggle="modal"
 					data-target="#confirm-modal" th:data-name="${bear.id}">削除</a></td>
 			</tr>
